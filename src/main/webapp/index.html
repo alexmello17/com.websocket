@@ -1,49 +1,27 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Testing websockets</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript" src="app.js"></script>
+<link href='https://fonts.googleapis.com/css?family=Open+Sans:700,600' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" type="text/css" href="app.css">
+<title>MR ROBOT - CHAT</title>
 </head>
 <body>
-	<div>
-		<h2>MR ROBOT - CHAT</h2>
-		<textarea id='text' rows="10" cols="25"></textarea>
-		<input type="submit" value="ENVIAR" onclick="start()" />
+	<div id="loginDiv" class="box">
+		<h1>Apelido</h1>
+		<input id="login" type="text" class="email" />
+		<br/><br/>
+		<input id="btnLgn" type="submit" value="Entrar" onclick="login()" class="btn">
 	</div>
-	<div id="messages"></div>
-	<script type="text/javascript">
-		var webSocket = new WebSocket('ws://127.0.0.1:8080/websocket-web/wschat');
-
-		webSocket.onerror = function(event) {
-			onError(event)
-		};
-
-		webSocket.onopen = function(event) {
-			onOpen(event)
-		};
-
-		webSocket.onmessage = function(event) {
-			onMessage(event)
-		};
-
-		function onMessage(event) {
-			document.getElementById('messages').innerHTML 
-				+= '<br />' + event.data;
-		}
-
-		function onOpen(event) {
-			document.getElementById('messages').innerHTML 
-				= 'Connection established';
-		}
-
-		function onError(event) {
-			alert(event.data);
-		}
-
-		function start() {
-			webSocket.send(document.getElementById('text').value);
-			document.getElementById('text').value('');
-			return false;
-		}
-	</script>
+	
+	<div id="users" align="right"></div>
+	<div id="main" align="left">
+		<h1>MR ROBOT - CHAT</h1>
+		<input id="text" type="text" class="email" style="width:550px"/>
+		<input id="send" type="submit" value="Enviar" onclick="send()" class="btn"/>
+		<br/>
+		<div id="messages" align="left" style="border:1px solid black;"></div>
+	</div>
 </body>
 </html>
